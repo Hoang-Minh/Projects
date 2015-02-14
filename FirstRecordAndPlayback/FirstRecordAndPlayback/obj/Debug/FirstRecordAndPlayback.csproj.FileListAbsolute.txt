@@ -2,3 +2,5 @@ C:\Users\Minh\Desktop\Project\CodedUI_Test\FirstRecordAndPlayback\FirstRecordAnd
 C:\Users\Minh\Desktop\Project\CodedUI_Test\FirstRecordAndPlayback\FirstRecordAndPlayback\bin\Debug\FirstRecordAndPlayback.pdb
 C:\Users\Minh\Desktop\Project\CodedUI_Test\FirstRecordAndPlayback\FirstRecordAndPlayback\obj\Debug\FirstRecordAndPlayback.dll
 C:\Users\Minh\Desktop\Project\CodedUI_Test\FirstRecordAndPlayback\FirstRecordAndPlayback\obj\Debug\FirstRecordAndPlayback.pdb
+C:\Users\Minh\Desktop\Project\CodedUI_Test\FirstRecordAndPlayback\FirstRecordAndPlayback\obj\Debug\FirstRecordAndPlayback.csprojResolveAssemblyReference.cache
+C:\Users\Minh\Desktop\Project\CodedUI_Test\FirstRecordAndPlayback\FirstRecordAndPlayback\bin\Debug\data.csv

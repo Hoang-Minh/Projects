@@ -18,7 +18,7 @@ namespace FirstRecordAndPlayback
     using System.Windows.Input;
     using Microsoft.VisualStudio.TestTools.UITest.Extension;
     using Microsoft.VisualStudio.TestTools.UITesting;
-    using Microsoft.VisualStudio.TestTools.UITesting.WinControls; // To identify the Windows Controls
+    using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
     using Mouse = Microsoft.VisualStudio.TestTools.UITesting.Mouse;
@@ -32,55 +32,73 @@ namespace FirstRecordAndPlayback
         /// <summary>
         /// This method tests the addition of two numbers
         /// </summary>
-        public void AdditionOperation()
+        public void AdditionOperatoin()
         {
             #region Variable Declarations
-            WinTitleBar uICalculatorTitleBar = this.NextGenSim.UICalculatorTitleBar;
-            WinButton uIItem8Button = this.NextGenSim.UIItemWindow.UIItem8Button;
-            WinButton uIItem9Button = this.NextGenSim.UIItemWindow1.UIItem9Button;
-            WinButton uIAddButton = this.NextGenSim.UIItemWindow2.UIAddButton;
-            WinButton uIItem2Button = this.NextGenSim.UIItemWindow3.UIItem2Button;
-            WinButton uIItem3Button = this.NextGenSim.UIItemWindow4.UIItem3Button;
-            WinButton uIEqualsButton = this.NextGenSim.UIItemWindow5.UIEqualsButton;
+            WinTitleBar uICalculatorTitleBar = this.UICalculatorWindow.UICalculatorTitleBar;
+            WinButton uIItem8Button = this.UICalculatorWindow.UIItemWindow.UIItem8Button;
+            WinButton uIItem9Button = this.UICalculatorWindow.UIItemWindow1.UIItem9Button;
+            WinButton uIAddButton = this.UICalculatorWindow.UIItemWindow2.UIAddButton;
+            WinButton uIItem2Button = this.UICalculatorWindow.UIItemWindow3.UIItem2Button;
+            WinButton uIItem3Button = this.UICalculatorWindow.UIItemWindow4.UIItem3Button;
+            WinButton uIEqualsButton = this.UICalculatorWindow.UIItemWindow5.UIEqualsButton;
             #endregion
 
             // Click 'Calculator' title bar
-            // Coordinate does not matter
-            // it could be deleted
-            Mouse.Click(uICalculatorTitleBar);
+            Mouse.Click(uICalculatorTitleBar, new Point(20, 11));
 
             // Click '8' button
-            Mouse.Click(uIItem8Button);
+            Mouse.Click(uIItem8Button, new Point(24, 15));
 
             // Click '9' button
-            Mouse.Click(uIItem9Button);
+            Mouse.Click(uIItem9Button, new Point(16, 18));
 
             // Click 'Add' button
             Mouse.Click(uIAddButton, new Point(24, 10));
 
             // Click '2' button
-            Mouse.Click(uIItem2Button);
+            Mouse.Click(uIItem2Button, new Point(26, 17));
 
             // Click '3' button
             Mouse.Click(uIItem3Button, new Point(21, 14));
 
             // Click 'Equals' button
-            Mouse.Click(uIEqualsButton);
+            Mouse.Click(uIEqualsButton, new Point(19, 29));
         }
         
-        // This property is a type of UICalculatorMainWindow
-        // with the name of NextGenSim.
-        // NextGenSim is the name of the property. Nothing more
-        // no related to class whatever
-        // we will define the class UICalculatorMainWindow below
+        /// <summary>
+        /// Asserting addition operation
+        /// </summary>
+        public void AssertAdd(string expData)
+        {
+            #region Variable Declarations
+            WinText uIItem112Text = this.UICalculatorWindow.UIItem112Window.UIItem112TextProperty;
+            #endregion
+
+            // Verify that the 'DisplayText' property of '112' label equals '112'
+            Assert.AreEqual(expData, uIItem112Text.DisplayText, "The value should be 112, else addition is not working properly");
+        }
+        
         #region Properties
-        public UICalculatorMainWindow NextGenSim
+        public virtual AssertAddExpectedValues AssertAddExpectedValues
+        {
+            get
+            {
+                if ((this.mAssertAddExpectedValues == null))
+                {
+                    this.mAssertAddExpectedValues = new AssertAddExpectedValues();
+                }
+                return this.mAssertAddExpectedValues;
+            }
+        }
+        
+        public UICalculatorWindow UICalculatorWindow
         {
             get
             {
                 if ((this.mUICalculatorWindow == null))
                 {
-                    this.mUICalculatorWindow = new UICalculatorMainWindow();
+                    this.mUICalculatorWindow = new UICalculatorWindow();
                 }
                 return this.mUICalculatorWindow;
             }
@@ -88,17 +106,32 @@ namespace FirstRecordAndPlayback
         #endregion
         
         #region Fields
-        private UICalculatorMainWindow mUICalculatorWindow;
+        private AssertAddExpectedValues mAssertAddExpectedValues;
+        
+        private UICalculatorWindow mUICalculatorWindow;
         #endregion
     }
     
-    // How we define the UICalculatorMainWindow
-    // it will inherit from WinWindow
+    /// <summary>
+    /// Parameters to be passed into 'AssertAdd'
+    /// </summary>
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
-    public class UICalculatorMainWindow : WinWindow
+    public class AssertAddExpectedValues
     {
-        // constructor   
-        public UICalculatorMainWindow()
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '112' label equals '112'
+        /// </summary>
+        public string UIItem112TextDisplayText = "115";
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UICalculatorWindow : WinWindow
+    {
+        
+        public UICalculatorWindow()
         {
             #region Search Criteria
             this.SearchProperties[WinWindow.PropertyNames.Name] = "Calculator";
@@ -194,6 +227,30 @@ namespace FirstRecordAndPlayback
                 return this.mUIItemWindow5;
             }
         }
+        
+        public UIItemWindow6 UIItemWindow6
+        {
+            get
+            {
+                if ((this.mUIItemWindow6 == null))
+                {
+                    this.mUIItemWindow6 = new UIItemWindow6(this);
+                }
+                return this.mUIItemWindow6;
+            }
+        }
+        
+        public UIItem112Window UIItem112Window
+        {
+            get
+            {
+                if ((this.mUIItem112Window == null))
+                {
+                    this.mUIItem112Window = new UIItem112Window(this);
+                }
+                return this.mUIItem112Window;
+            }
+        }
         #endregion
         
         #region Fields
@@ -210,14 +267,17 @@ namespace FirstRecordAndPlayback
         private UIItemWindow4 mUIItemWindow4;
         
         private UIItemWindow5 mUIItemWindow5;
+        
+        private UIItemWindow6 mUIItemWindow6;
+        
+        private UIItem112Window mUIItem112Window;
         #endregion
     }
     
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
     public class UIItemWindow : WinWindow
     {
-        // try to send the search property to the base class
-        // The WinWindow (UIItemWindow) is identified using ControlID Property "138"
+        
         public UIItemWindow(UITestControl searchLimitContainer) : 
                 base(searchLimitContainer)
         {
@@ -236,7 +296,6 @@ namespace FirstRecordAndPlayback
                 {
                     this.mUIItem8Button = new WinButton(this);
                     #region Search Criteria
-                    // SearchProperties are used to identify control using its properties
                     this.mUIItem8Button.SearchProperties[WinButton.PropertyNames.Name] = "8";
                     this.mUIItem8Button.WindowTitles.Add("Calculator");
                     #endregion
@@ -428,6 +487,78 @@ namespace FirstRecordAndPlayback
         
         #region Fields
         private WinButton mUIEqualsButton;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIItemWindow6 : WinWindow
+    {
+        
+        public UIItemWindow6(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.ControlId] = "137";
+            this.WindowTitles.Add("Calculator");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UIItem7Button
+        {
+            get
+            {
+                if ((this.mUIItem7Button == null))
+                {
+                    this.mUIItem7Button = new WinButton(this);
+                    #region Search Criteria
+                    this.mUIItem7Button.SearchProperties[WinButton.PropertyNames.Name] = "7";
+                    this.mUIItem7Button.WindowTitles.Add("Calculator");
+                    #endregion
+                }
+                return this.mUIItem7Button;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUIItem7Button;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
+    public class UIItem112Window : WinWindow
+    {
+        
+        public UIItem112Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.ControlId] = "150";
+            this.WindowTitles.Add("Calculator");
+            #endregion
+        }
+        
+        #region Properties
+        public WinText UIItem112TextProperty
+        {
+            get
+            {
+                if ((this.mUIItem112Text == null))
+                {
+                    this.mUIItem112Text = new WinText(this);
+                    #region Search Criteria
+                    this.mUIItem112Text.SearchProperties[WinText.PropertyNames.Name] = "Result";
+                    this.mUIItem112Text.WindowTitles.Add("Calculator");
+                    #endregion
+                }
+                return this.mUIItem112Text;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinText mUIItem112Text;
         #endregion
     }
 }
