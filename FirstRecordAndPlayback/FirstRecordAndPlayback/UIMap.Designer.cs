@@ -18,7 +18,7 @@ namespace FirstRecordAndPlayback
     using System.Windows.Input;
     using Microsoft.VisualStudio.TestTools.UITest.Extension;
     using Microsoft.VisualStudio.TestTools.UITesting;
-    using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
+    using Microsoft.VisualStudio.TestTools.UITesting.WinControls; // To identify the Windows Controls
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
     using Mouse = Microsoft.VisualStudio.TestTools.UITesting.Mouse;
@@ -32,48 +32,55 @@ namespace FirstRecordAndPlayback
         /// <summary>
         /// This method tests the addition of two numbers
         /// </summary>
-        public void AdditionOperatoin()
+        public void AdditionOperation()
         {
             #region Variable Declarations
-            WinTitleBar uICalculatorTitleBar = this.UICalculatorWindow.UICalculatorTitleBar;
-            WinButton uIItem8Button = this.UICalculatorWindow.UIItemWindow.UIItem8Button;
-            WinButton uIItem9Button = this.UICalculatorWindow.UIItemWindow1.UIItem9Button;
-            WinButton uIAddButton = this.UICalculatorWindow.UIItemWindow2.UIAddButton;
-            WinButton uIItem2Button = this.UICalculatorWindow.UIItemWindow3.UIItem2Button;
-            WinButton uIItem3Button = this.UICalculatorWindow.UIItemWindow4.UIItem3Button;
-            WinButton uIEqualsButton = this.UICalculatorWindow.UIItemWindow5.UIEqualsButton;
+            WinTitleBar uICalculatorTitleBar = this.NextGenSim.UICalculatorTitleBar;
+            WinButton uIItem8Button = this.NextGenSim.UIItemWindow.UIItem8Button;
+            WinButton uIItem9Button = this.NextGenSim.UIItemWindow1.UIItem9Button;
+            WinButton uIAddButton = this.NextGenSim.UIItemWindow2.UIAddButton;
+            WinButton uIItem2Button = this.NextGenSim.UIItemWindow3.UIItem2Button;
+            WinButton uIItem3Button = this.NextGenSim.UIItemWindow4.UIItem3Button;
+            WinButton uIEqualsButton = this.NextGenSim.UIItemWindow5.UIEqualsButton;
             #endregion
 
             // Click 'Calculator' title bar
-            Mouse.Click(uICalculatorTitleBar, new Point(20, 11));
+            // Coordinate does not matter
+            // it could be deleted
+            Mouse.Click(uICalculatorTitleBar);
 
             // Click '8' button
-            Mouse.Click(uIItem8Button, new Point(24, 15));
+            Mouse.Click(uIItem8Button);
 
             // Click '9' button
-            Mouse.Click(uIItem9Button, new Point(16, 18));
+            Mouse.Click(uIItem9Button);
 
             // Click 'Add' button
             Mouse.Click(uIAddButton, new Point(24, 10));
 
             // Click '2' button
-            Mouse.Click(uIItem2Button, new Point(26, 17));
+            Mouse.Click(uIItem2Button);
 
             // Click '3' button
             Mouse.Click(uIItem3Button, new Point(21, 14));
 
             // Click 'Equals' button
-            Mouse.Click(uIEqualsButton, new Point(19, 29));
+            Mouse.Click(uIEqualsButton);
         }
         
+        // This property is a type of UICalculatorMainWindow
+        // with the name of NextGenSim.
+        // NextGenSim is the name of the property. Nothing more
+        // no related to class whatever
+        // we will define the class UICalculatorMainWindow below
         #region Properties
-        public UICalculatorWindow UICalculatorWindow
+        public UICalculatorMainWindow NextGenSim
         {
             get
             {
                 if ((this.mUICalculatorWindow == null))
                 {
-                    this.mUICalculatorWindow = new UICalculatorWindow();
+                    this.mUICalculatorWindow = new UICalculatorMainWindow();
                 }
                 return this.mUICalculatorWindow;
             }
@@ -81,15 +88,17 @@ namespace FirstRecordAndPlayback
         #endregion
         
         #region Fields
-        private UICalculatorWindow mUICalculatorWindow;
+        private UICalculatorMainWindow mUICalculatorWindow;
         #endregion
     }
     
+    // How we define the UICalculatorMainWindow
+    // it will inherit from WinWindow
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
-    public class UICalculatorWindow : WinWindow
+    public class UICalculatorMainWindow : WinWindow
     {
-        
-        public UICalculatorWindow()
+        // constructor   
+        public UICalculatorMainWindow()
         {
             #region Search Criteria
             this.SearchProperties[WinWindow.PropertyNames.Name] = "Calculator";
@@ -207,7 +216,8 @@ namespace FirstRecordAndPlayback
     [GeneratedCode("Coded UITest Builder", "12.0.30501.0")]
     public class UIItemWindow : WinWindow
     {
-        
+        // try to send the search property to the base class
+        // The WinWindow (UIItemWindow) is identified using ControlID Property "138"
         public UIItemWindow(UITestControl searchLimitContainer) : 
                 base(searchLimitContainer)
         {
@@ -226,6 +236,7 @@ namespace FirstRecordAndPlayback
                 {
                     this.mUIItem8Button = new WinButton(this);
                     #region Search Criteria
+                    // SearchProperties are used to identify control using its properties
                     this.mUIItem8Button.SearchProperties[WinButton.PropertyNames.Name] = "8";
                     this.mUIItem8Button.WindowTitles.Add("Calculator");
                     #endregion
