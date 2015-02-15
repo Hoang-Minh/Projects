@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,22 @@ namespace FirstRecordAndPlayback
 {
     public class CustomCaller
     {
-        public void Button8Click()
+        public static void Button8Click()
         {
-            // Create an instance for Calc Window
-            CustomCalcWindow calcWindow = new CustomCalcWindow();
+            // Instance for WinWindow
+            WinWindow calcWindow = new WinWindow();
+            calcWindow.SearchProperties[WinWindow.PropertyNames.Name] = "Calculator";
+            calcWindow.SearchProperties[WinWindow.PropertyNames.ClassName] = "CalcFrame";
 
-            // Create an instance for CustomUIItemWindow
-            CustomUIItemWindow cusItemWind = new CustomUIItemWindow(calcWindow);
+            //// Instance for WinWindow
+            //WinWindow uiItemWindow = new WinWindow(calcWindow);
+            //uiItemWindow.SearchProperties[WinWindow.PropertyNames.ControlId] = "138";
 
-            Mouse.Click(cusItemWind.UIItem8Button);
+            // Instance for WinWindow
+            WinButton btn = new WinButton(calcWindow);
+            btn.SearchProperties[WinWindow.PropertyNames.Name] = "8";
+
+            Mouse.Click(btn);
         }
 
     }
