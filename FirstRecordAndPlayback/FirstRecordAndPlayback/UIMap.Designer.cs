@@ -334,6 +334,9 @@ namespace FirstRecordAndPlayback
                     #region Search Criteria
                     this.mUIItem9Button.SearchProperties[WinButton.PropertyNames.Name] = "9";
                     this.mUIItem9Button.WindowTitles.Add("Calculator");
+                    Console.WriteLine("The friendly name of the control is " + this.mUIItem9Button.GetProperty(WinButton.PropertyNames.FriendlyName));
+
+                    Console.WriteLine("If the control exits " + this.mUIItem9Button.GetProperty(WinButton.PropertyNames.Exists));
                     #endregion
                 }
                 return this.mUIItem9Button;
