@@ -337,6 +337,8 @@ namespace FirstRecordAndPlayback
                     Console.WriteLine("The friendly name of the control is " + this.mUIItem9Button.GetProperty(WinButton.PropertyNames.FriendlyName));
 
                     Console.WriteLine("If the control exits " + this.mUIItem9Button.GetProperty(WinButton.PropertyNames.Exists));
+
+                    Console.WriteLine("The friendly name of the control is " + this.mUIItem9Button.GetProperty(WinButton.PropertyNames.TechnologyName));
                     #endregion
                 }
                 return this.mUIItem9Button;

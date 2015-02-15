@@ -26,17 +26,28 @@ namespace FirstRecordAndPlayback
         [TestInitialize]
         public void Initialize()
         {
-            ApplicationUnderTest.Launch(@"C:\Windows\System32\calc.exe");
+            //launch the application
+            var app = ApplicationUnderTest.Launch("C:\\Windows\\System32\\calc.exe", "%windir%\\System32\\calc.exe");            
         }
+
+        //[TestCleanup]
+        //public void CleanUp()
+        //{
+            
+        //}
 
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "|DataDirectory|\\data.csv", "data#csv", DataAccessMethod.Sequential), DeploymentItem("data.csv"), TestMethod]
         public void CodedUITestMethod1()
         {
             // To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
-            this.UIMap.AdditionOperatoin();
-            Console.WriteLine("Executing this scenario" + TestContext.DataRow["Scenario"].ToString());
-            this.UIMap.AssertAdd(TestContext.DataRow["Result"].ToString());
+            //this.UIMap.AdditionOperatoin();
+            //Console.WriteLine("Executing this scenario" + TestContext.DataRow["Scenario"].ToString());
+            //this.UIMap.AssertAdd(TestContext.DataRow["Result"].ToString());
 
+            //CustomCaller cust = new CustomCaller();
+            //cust.Button8Click();
+
+            CustomCaller.Button8Click();
 
         }
 
